@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Talento Cultural Culiacán</title>
   <style>
-    /* Estilos responsivos básicos */
+    /* Estilos responsivos generales */
     * { box-sizing: border-box; }
     body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #1a1a1a; background-color: #f9f9f9; }
     header, nav, main, footer, section { padding: 1.5rem; max-width: 1000px; margin: 0 auto; }
@@ -13,13 +13,32 @@
     nav a { color: #38bdf8; margin-right: 15px; text-decoration: none; font-weight: bold; }
     nav a:hover { text-decoration: underline; }
     .card { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    form { display: grid; gap: 1rem; max-width: 600px; }
-    label { font-weight: 600; }
-    input[type="text"], input[type="email"], input[type="tel"], textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
-    .radio-group, .checkbox-group { display: flex; gap: 10px; align-items: center; }
-    button[type="submit"] { background: #2563eb; color: white; padding: 0.75rem; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; }
-    button[type="submit"]:hover { background: #1d4ed8; }
     
+    /* Estilos avanzados y accesibles para el formulario */
+    fieldset { border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; background: #ffffff; }
+    legend { font-weight: bold; color: #0f172a; padding: 0 8px; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 1.2rem; }
+    label { font-weight: 600; margin-bottom: 0.4rem; color: #1e293b; }
+    .required { color: #f43f5e; margin-left: 2px; }
+    .help-text { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
+
+    input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="number"], select, textarea {
+      width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #fff; color: #1a1a1a; font-size: 1rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid #2563eb; outline-offset: 1px; border-color: transparent;
+    }
+
+    .radio-group, .checkbox-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.25rem; align-items: center; }
+    .radio-option, .checkbox-option { display: flex; align-items: center; gap: 0.5rem; }
+    input[type="radio"], input[type="checkbox"] { width: 1.1rem; height: 1.1rem; accent-color: #2563eb; cursor: pointer; }
+
+    button[type="submit"] {
+      width: 100%; background: #2563eb; color: white; border: none; padding: 0.85rem; font-size: 1.1rem;
+      font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+    }
+    button[type="submit"]:hover { background: #1d4ed8; }
+
     /* Contenedores responsivos para multimedia y canvas */
     video, audio, svg { width: 100%; max-width: 100%; height: auto; }
     .canvas-container { width: 100%; max-width: 500px; margin: auto; }
@@ -32,12 +51,11 @@
   <header>
     <h1>Talento Cultural Culiacán</h1>
     <p>Plataforma de mapeo y promoción artística local</p>
-    <!-- Navegación con enlaces internos -->
     <nav>
       <a href="#inicio">Inicio</a>
       <a href="#multimedia">Muestra Cultural</a>
       <a href="#graficos">Interactivos</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#contacto">Registro</a>
     </nav>
   </header>
 
@@ -52,14 +70,12 @@
     <section id="multimedia" class="card">
       <h2>Muestra Multimedia</h2>
       
-      <!-- Video con múltiples fuentes y fallback -->
       <h3>Muestra Audiovisual</h3>
       <video controls loop poster="https://via.placeholder.com/800x450?text=Vista+Previa+Video">
         <source src="video67.mp4" type="video/mp4">
         <p>Tu navegador no admite la etiqueta de video. Puedes <a href="video67.mp4">descargar el video aquí</a>.</p>
       </video>
 
-      <!-- Audio con múltiples fuentes y fallback -->
       <h3>Audio / Entrevista a Artista</h3>
       <audio controls loop preload="metadata">
         <source src="audio-muestra.mp3" type="audio/mpeg">
@@ -72,7 +88,6 @@
     <section id="graficos" class="card">
       <h2>Gráficos Interactivos</h2>
       
-      <!-- SVG Escalable con animación CSS integrada -->
       <h3>Insignia Cultural (SVG Vectorial)</h3>
       <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
         <style>
@@ -84,62 +99,111 @@
         <text x="90" y="55" fill="#ffffff" font-size="18" font-family="sans-serif" font-weight="bold">Culiacán Arte</text>
       </svg>
 
-      <!-- Canvas responsivo con animación en JavaScript -->
       <h3>Animación con Canvas HTML5</h3>
       <div class="canvas-container">
         <canvas id="miCanvas" width="500" height="200"></canvas>
       </div>
     </section>
 
-    <!-- 4. Formulario de Entrada con Validaciones -->
+    <!-- 4. Formulario de Entrada con Validaciones Avanzadas y Accesibilidad -->
     <section id="contacto" class="card">
-      <h2>Registro de Artista / Contacto</h2>
-      <form action="#" method="POST">
+      <h2>Registro de Creadores Culturales</h2>
+      <p style="color: #64748b; margin-bottom: 1.5rem;">Inscribe tu perfil artístico en la plataforma. Los campos marcados con (<span class="required">*</span>) son obligatorios.</p>
+
+      <form action="#" method="POST" id="registroForm">
         
-        <!-- Nombre -->
-        <div>
-          <label for="nombre">Nombre completo:</label>
-          <input type="text" id="nombre" name="nombre" required maxlength="60" placeholder="Ej. Roberto Gastélum">
-        </div>
+        <!-- Datos Personales -->
+        <fieldset>
+          <legend>Datos Personales y Cuenta</legend>
 
-        <!-- Correo Electrónico con validación por patrón -->
-        <div>
-          <label for="email">Correo electrónico:</label>
-          <input type="email" id="email" name="email" required placeholder="usuario@dominio.com">
-        </div>
-
-        <!-- Teléfono con validación de formato (10 dígitos) -->
-        <div>
-          <label for="telefono">Número de teléfono (10 dígitos):</label>
-          <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10}" maxlength="10" placeholder="6671234567">
-        </div>
-
-        <!-- Radio Buttons -->
-        <div>
-          <label>Disciplina artística principal:</label>
-          <div class="radio-group">
-            <input type="radio" id="musica" name="disciplina" value="musica" required>
-            <label for="musica">Música</label>
-            
-            <input type="radio" id="diseno" name="disciplina" value="diseno">
-            <label for="diseno">Diseño / Ilustración</label>
-            
-            <input type="radio" id="teatro" name="disciplina" value="teatro">
-            <label for="teatro">Artes Escénicas</label>
+          <div class="form-group">
+            <label for="nombre">Nombre completo <span class="required">*</span></label>
+            <input type="text" id="nombre" name="nombre" required minlength="3" maxlength="60" placeholder="Ej. Maria Lopez" aria-describedby="nombre-help">
+            <span id="nombre-help" class="help-text">Ingresa tu nombre y apellidos (mínimo 3 caracteres).</span>
           </div>
-        </div>
 
-        <!-- Campo de texto (Mensaje) -->
-        <div>
-          <label for="mensaje">Propuesta o biografía corta:</label>
-          <textarea id="mensaje" name="mensaje" rows="4" required maxlength="300" placeholder="Escribe tu mensaje aquí (máx. 300 caracteres)..."></textarea>
-        </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="ejemplo@dominio.com" aria-describedby="email-help">
+            <span id="email-help" class="help-text">Formato válido: usuario@dominio.com</span>
+          </div>
 
-        <!-- Checkbox de Términos y Condiciones -->
-        <div class="checkbox-group">
-          <input type="checkbox" id="terminos" name="terminos" required>
-          <label for="terminos">Acepto los términos de la convocatoria y la política de privacidad.</label>
-        </div>
+          <div class="form-group">
+            <label for="password">Contraseña de acceso <span class="required">*</span></label>
+            <input type="password" id="password" name="password" required minlength="8" placeholder="••••••••" aria-describedby="pass-help">
+            <span id="pass-help" class="help-text">Mínimo 8 caracteres (entrada oculta por seguridad).</span>
+          </div>
+
+          <div class="form-group">
+            <label for="fechaNacimiento">Fecha de nacimiento <span class="required">*</span></label>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" required min="1940-01-01" max="2010-12-31" aria-describedby="fecha-help">
+            <span id="fecha-help" class="help-text">Selecciona una fecha válida dentro del rango permitido.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="edad">Edad (Años) <span class="required">*</span></label>
+            <input type="number" id="edad" name="edad" required min="15" max="99" placeholder="Ej. 24" aria-describedby="edad-help">
+            <span id="edad-help" class="help-text">Debes ser mayor de 15 años para registrarte.</span>
+          </div>
+        </fieldset>
+
+        <!-- Ubicación e Identidad -->
+        <fieldset>
+          <legend>Ubicación e Identidad</legend>
+
+          <div class="form-group">
+            <label for="direccion">Dirección o Colonia <span class="required">*</span></label>
+            <input type="text" id="direccion" name="direccion" required maxlength="100" placeholder="Ej. Col. Centro, Av. Álvaro Obregón #123">
+          </div>
+
+          <div class="form-group">
+            <label for="ciudad">Ciudad de residencia <span class="required">*</span></label>
+            <select id="ciudad" name="ciudad" required>
+              <option value="" disabled selected>-- Selecciona tu ciudad --</option>
+              <option value="culiacan">Culiacán</option>
+              <option value="mazatlan">Mazatlán</option>
+              <option value="mochis">Los Mochis</option>
+              <option value="guasave">Guasave</option>
+              <option value="otra">Otra localidad</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Identidad de género <span class="required">*</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="femenino" name="genero" value="femenino" required>
+                <label for="femenino">Femenino</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="masculino" name="genero" value="masculino">
+                <label for="masculino">Masculino</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="nobinario" name="genero" value="nobinario">
+                <label for="nobinario">No binario / Otro</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Propuesta y Privacidad -->
+        <fieldset>
+          <legend>Propuesta Artística y Privacidad</legend>
+
+          <div class="form-group">
+            <label for="mensaje">Breve descripción o biografía</label>
+            <textarea id="mensaje" name="mensaje" rows="4" maxlength="300" placeholder="Escribe un resumen de tu trayectoria o proyectos independientes..." aria-describedby="bio-help"></textarea>
+            <span id="bio-help" class="help-text">Máximo 300 caracteres.</span>
+          </div>
+
+          <div class="checkbox-option">
+            <input type="checkbox" id="terminos" name="terminos" required>
+            <label for="terminos">
+              Acepto los términos de la convocatoria y la <a href="#privacidad" style="color: #2563eb;">política de privacidad</a> bajo protocolo HTTPS <span class="required">*</span>
+            </label>
+          </div>
+        </fieldset>
 
         <!-- Botón de Envío -->
         <button type="submit">Enviar Registro</button>
@@ -150,7 +214,7 @@
   <!-- Pie de página -->
   <footer>
     <p>&copy; 2026 Talento Cultural Culiacán. Todos los derechos reservados.</p>
-    <p>Contacto: <a href="mailto:contacto@talentoculiacan.org" style="color: #cbd5e1;">contacto@talentoculiacan.org</a></p>
+    <p>Contacto: <a href="mailto:contacto@talentoculiacan.org" style="color: #475569;">contacto@talentoculiacan.org</a></p>
   </footer>
 
   <!-- Script para la animación interactiva del Canvas -->
@@ -163,21 +227,17 @@
     const radius = 20;
 
     function animarCanvas() {
-      // Limpiar lienzo
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Dibujar fondo de referencia
       ctx.fillStyle = "#0f172a";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Dibujar elemento en movimiento
       ctx.beginPath();
       ctx.arc(x, canvas.height / 2, radius, 0, Math.PI * 2);
       ctx.fillStyle = "#38bdf8";
       ctx.fill();
       ctx.closePath();
 
-      // Rebote de bordes
       if (x + dx > canvas.width - radius || x + dx < radius) {
         dx = -dx;
       }
@@ -186,7 +246,6 @@
       requestAnimationFrame(animarCanvas);
     }
 
-    // Iniciar animación
     animarCanvas();
   </script>
 </body>
