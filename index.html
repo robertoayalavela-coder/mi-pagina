@@ -5,248 +5,319 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Talento Cultural Culiacán</title>
   <style>
-    /* Estilos responsivos generales */
+    :root {
+      --bg-main: #0c0c0e;
+      --card-bg: #161619;
+      --card-border: #27272a;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --accent-neon: #00ff66;
+      --accent-neon-hover: #4dff88;
+    }
+
     * { box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #1a1a1a; background-color: #f9f9f9; }
-    header, nav, main, footer, section { padding: 1.5rem; max-width: 1000px; margin: 0 auto; }
-    header { background: #0f172a; color: white; border-bottom: 4px solid #38bdf8; text-align: center; }
-    nav a { color: #38bdf8; margin-right: 15px; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .card { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      margin: 0; padding: 0;
+      color: var(--text-main);
+      background-color: var(--bg-main);
+    }
+
+    header {
+      background: #000000;
+      color: white;
+      border-bottom: 4px solid var(--accent-neon);
+      padding: 1.5rem 1rem;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-area { display: flex; align-items: center; gap: 0.75rem; font-weight: bold; font-size: 1.2rem; }
+    .logo-icon { width: 32px; height: 32px; border: 1px solid var(--accent-neon); display: flex; align-items: center; justify-content: center; }
+
+    nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    nav a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: var(--accent-neon); }
+
+    .header-actions { display: flex; gap: 1rem; align-items: center; }
+    .btn-contrast { background: transparent; border: 1px solid var(--card-border); color: var(--text-main); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.8rem; cursor: pointer; }
+    .btn-register { background: var(--text-main); color: #000; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 0.85rem; }
+    .btn-register:hover { background: var(--accent-neon); }
+
+    main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; display: flex; flex-direction: column; gap: 2rem; }
+
+    /* Sección Hero */
+    .hero-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .hero-section { grid-template-columns: 1fr; } }
+
+    .hero-content h1 { font-size: 2.5rem; line-height: 1.1; margin-top: 0; color: var(--text-main); }
+    .hero-content p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
     
-    /* Estilos avanzados y accesibles para el formulario */
-    fieldset { border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; background: #ffffff; }
-    legend { font-weight: bold; color: #0f172a; padding: 0 8px; }
-    .form-group { display: flex; flex-direction: column; margin-bottom: 1.2rem; }
-    label { font-weight: 600; margin-bottom: 0.4rem; color: #1e293b; }
-    .required { color: #f43f5e; margin-left: 2px; }
-    .help-text { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
+    .btn-primary { background: var(--accent-neon); color: #000000; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s, transform 0.2s; }
+    .btn-primary:hover { background: var(--accent-neon-hover); transform: scale(1.02); }
+    
+    .btn-secondary { background: transparent; border: 1px solid var(--card-border); color: var(--text-main); padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+    .btn-secondary:hover { border-color: var(--accent-neon); color: var(--accent-neon); }
 
-    input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="number"], select, textarea {
-      width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #fff; color: #1a1a1a; font-size: 1rem;
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; border-top: 1px solid var(--card-border); padding-top: 1.5rem; }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--text-main); display: block; }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Mockup Visual del Mapa */
+    .map-mockup {
+      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
+      height: 360px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+      background-image: radial-gradient(var(--card-border) 1px, transparent 1px); background-size: 20px 20px;
     }
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid #2563eb; outline-offset: 1px; border-color: transparent;
-    }
+    .map-pin { position: absolute; background: #000000; border: 1px solid var(--accent-neon); color: var(--text-main); padding: 4px 10px; border-radius: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.5); animation: floatPin 3s ease-in-out infinite alternate; }
+    @keyframes floatPin { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
 
-    .radio-group, .checkbox-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.25rem; align-items: center; }
-    .radio-option, .checkbox-option { display: flex; align-items: center; gap: 0.5rem; }
-    input[type="radio"], input[type="checkbox"] { width: 1.1rem; height: 1.1rem; accent-color: #2563eb; cursor: pointer; }
+    /* 2. Sección Características (3 columnas) */
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .section-header h2 { font-size: 1.8rem; margin: 0; letter-spacing: -0.5px; }
+    .link-action { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: bold; transition: color 0.2s; }
+    .link-action:hover { color: var(--accent-neon); }
 
-    button[type="submit"] {
-      width: 100%; background: #2563eb; color: white; border: none; padding: 0.85rem; font-size: 1.1rem;
-      font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
-    }
-    button[type="submit"]:hover { background: #1d4ed8; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .feature-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem; transition: border-color 0.3s, transform 0.3s; }
+    .feature-card:hover { border-color: var(--accent-neon); transform: translateY(-3px); }
+    .card-badge { align-self: flex-end; font-size: 0.65rem; font-weight: bold; padding: 2px 6px; border: 1px solid var(--card-border); border-radius: 3px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1.5rem; }
+    .feature-card h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+    .feature-card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
 
-    /* Contenedores responsivos para multimedia y canvas */
-    video, audio, svg { width: 100%; max-width: 100%; height: auto; }
-    .canvas-container { width: 100%; max-width: 500px; margin: auto; }
-    canvas { width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 4px; background: #0f172a; }
+    /* 3. Sección Artistas Destacados (4 columnas) */
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .artist-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; transition: border-color 0.3s, transform 0.3s; }
+    .artist-card:hover { border-color: var(--accent-neon); transform: translateY(-3px); }
+    .artist-avatar { width: 50px; height: 50px; background: #27272a; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; color: var(--text-muted); border: 1px solid var(--card-border); border-radius: 50%; }
+    .artist-card h4 { margin: 0.5rem 0 0.2rem 0; font-size: 1.1rem; }
+    .artist-meta { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .tags-container { display: flex; gap: 5px; flex-wrap: wrap; margin: 0.5rem 0; }
+    .tag { background: #0c0c0e; border: 1px solid var(--card-border); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; color: var(--text-muted); }
+    
+    .btn-card-profile { background: transparent; border: 1px solid var(--card-border); padding: 0.5rem; border-radius: 4px; font-weight: bold; text-align: center; text-decoration: none; color: var(--text-main); transition: all 0.2s; }
+    .btn-card-profile:hover { background: var(--accent-neon); color: #000000; border-color: var(--accent-neon); }
+
+    /* 4. Banner CTA Inferior */
+    .cta-banner { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 3rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    @media (max-width: 768px) { .cta-banner { flex-direction: column; text-align: center; } }
+    .cta-banner-text h2 { margin: 0 0 0.5rem 0; font-size: 1.8rem; letter-spacing: -0.5px; }
+    .cta-banner-text p { margin: 0; color: var(--text-muted); font-size: 1rem; }
+
+    /* Pie de página */
+    footer { background: #000000; border-top: 1px solid var(--card-border); padding: 2rem 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--accent-neon); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <!-- 1. Encabezado -->
+  <!-- Encabezado con Estructura de Figma -->
   <header>
-    <h1>Talento Cultural Culiacán</h1>
-    <p>Plataforma de mapeo y promoción artística local</p>
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#multimedia">Muestra Cultural</a>
-      <a href="#graficos">Interactivos</a>
-      <a href="#contacto">Registro</a>
-    </nav>
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">🗺️</div>
+        <span>Culiacán <span style="color: var(--accent-neon);">Cultural</span></span>
+      </div>
+      
+      <nav aria-label="Navegación Principal">
+        <ul>
+          <li><a href="#inicio" class="active">Inicio</a></li>
+          <li><a href="#caracteristicas">Explorar Mapa</a></li>
+          <li><a href="#artistas">Artistas Destacados</a></li>
+          <li><a href="#contacto">Eventos</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn-contrast" onclick="alert('Modo alto contraste activado')">A+ Alto Contraste</button>
+        <a href="#contacto" class="btn-register">Registrarse como Artista</a>
+      </div>
+    </div>
   </header>
 
   <main>
-    <!-- Contenido Principal -->
-    <section id="inicio" class="card">
-      <h2>Mapa de Talento Local</h2>
-      <p>Bienvenido al portal del proyecto. Esta plataforma busca visibilizar a los creadores de Culiacán, conectando a músicos, ilustradores, artistas visuales y colectivos culturales independientes con la comunidad y espacios locales.</p>
-    </section>
+    <!-- 1. Sección Hero Principal -->
+    <section id="inicio" class="hero-section">
+      <div class="hero-content">
+        <h1>Descubre el Talento Artístico de Culiacán</h1>
+        <p>El mapa cultural que conecta a artistas locales con su comunidad. Encuentra músicos, bailarines, pintores y creadores de cada colonia de la ciudad en un solo lugar interactivo.</p>
+        
+        <div class="hero-buttons">
+          <a href="#caracteristicas" class="btn-primary">Explorar Mapa Interactivo ➔</a>
+          <a href="#contacto" class="btn-secondary">Regístrate como Artista</a>
+        </div>
 
-    <!-- 2. Integración de Multimedia -->
-    <section id="multimedia" class="card">
-      <h2>Muestra Multimedia</h2>
-      
-      <h3>Muestra Audiovisual</h3>
-      <video controls loop poster="https://via.placeholder.com/800x450?text=Vista+Previa+Video">
-        <source src="video67.mp4" type="video/mp4">
-        <p>Tu navegador no admite la etiqueta de video. Puedes <a href="video67.mp4">descargar el video aquí</a>.</p>
-      </video>
+        <div class="hero-stats">
+          <div>
+            <span class="stat-number">340+</span>
+            <span class="stat-label">Artistas Registrados</span>
+          </div>
+          <div>
+            <span class="stat-number">18</span>
+            <span class="stat-label">Colonias Mapeadas</span>
+          </div>
+          <div>
+            <span class="stat-number">12</span>
+            <span class="stat-label">Disciplinas</span>
+          </div>
+        </div>
+      </div>
 
-      <h3>Audio / Entrevista a Artista</h3>
-      <audio controls loop preload="metadata">
-        <source src="audio-muestra.mp3" type="audio/mpeg">
-        <source src="audio-muestra.ogg" type="audio/ogg">
-        <p>Tu navegador no soporta el elemento de audio. <a href="audio-muestra.mp3">Descarga el archivo de audio aquí</a>.</p>
-      </audio>
-    </section>
-
-    <!-- 3. Gráficos y Animaciones con SVG y Canvas -->
-    <section id="graficos" class="card">
-      <h2>Gráficos Interactivos</h2>
-      
-      <h3>Insignia Cultural (SVG Vectorial)</h3>
-      <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
-        <style>
-          .pulse { animation: opacityPulse 2s infinite ease-in-out; }
-          @keyframes opacityPulse { 0%, 100% { fill: #38bdf8; } 50% { fill: #f43f5e; } }
-        </style>
-        <rect width="100%" height="100%" rx="10" fill="#1e293b"/>
-        <circle cx="50" cy="50" r="25" class="pulse" />
-        <text x="90" y="55" fill="#ffffff" font-size="18" font-family="sans-serif" font-weight="bold">Culiacán Arte</text>
-      </svg>
-
-      <h3>Animación con Canvas HTML5</h3>
-      <div class="canvas-container">
-        <canvas id="miCanvas" width="500" height="200"></canvas>
+      <!-- Mockup Visual del Mapa -->
+      <div class="map-mockup">
+        <div class="map-pin" style="top: 30%; left: 25%;">CENTRO</div>
+        <div class="map-pin" style="top: 60%; left: 70%;">LAS QUINTAS</div>
+        <div class="map-pin" style="top: 75%; left: 40%;">TIERRA BLANCA</div>
       </div>
     </section>
 
-    <!-- 4. Formulario de Entrada con Validaciones Avanzadas y Accesibilidad -->
-    <section id="contacto" class="card">
-      <h2>Registro de Creadores Culturales</h2>
-      <p style="color: #64748b; margin-bottom: 1.5rem;">Inscribe tu perfil artístico en la plataforma. Los campos marcados con (<span class="required">*</span>) son obligatorios.</p>
+    <!-- 2. Sección Características (3 Columnas) -->
+    <section id="caracteristicas">
+      <div class="section-header">
+        <div>
+          <span style="font-size: 0.75rem; color: var(--accent-neon); font-weight: bold; text-transform: uppercase;">Features · 3-Col Grid</span>
+          <h2>Todo lo que necesitas para descubrir y conectar</h2>
+        </div>
+        <a href="#" class="link-action">VER TODAS LAS FUNCIONES ➔</a>
+      </div>
 
-      <form action="#" method="POST" id="registroForm">
-        
-        <!-- Datos Personales -->
-        <fieldset>
-          <legend>Datos Personales y Cuenta</legend>
+      <div class="grid-3">
+        <article class="feature-card">
+          <span class="card-badge">Explorar</span>
+          <h3>Descubrimiento Geolocalizado</h3>
+          <p>Filtra artistas por colonia, disciplina o disponibilidad. Pins interactivos muestran quién vive y trabaja cerca de ti.</p>
+        </article>
 
-          <div class="form-group">
-            <label for="nombre">Nombre completo <span class="required">*</span></label>
-            <input type="text" id="nombre" name="nombre" required minlength="3" maxlength="60" placeholder="Ej. Maria Lopez" aria-describedby="nombre-help">
-            <span id="nombre-help" class="help-text">Ingresa tu nombre y apellidos (mínimo 3 caracteres).</span>
-          </div>
+        <article class="feature-card">
+          <span class="card-badge">Contenido</span>
+          <h3>Previews de Audio y Video</h3>
+          <p>Escucha fragmentos musicales o mira clips de actuación directamente desde el perfil del artista, sin salir de la plataforma.</p>
+        </article>
 
-          <div class="form-group">
-            <label for="email">Correo electrónico <span class="required">*</span></label>
-            <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="ejemplo@dominio.com" aria-describedby="email-help">
-            <span id="email-help" class="help-text">Formato válido: usuario@dominio.com</span>
-          </div>
+        <article class="feature-card">
+          <span class="card-badge">Contacto</span>
+          <h3>Contacto Directo en 1 Clic</h3>
+          <p>Conecta por WhatsApp o correo electrónico directamente desde cualquier perfil. Sin intermediarios, sin demoras.</p>
+        </article>
+      </div>
+    </section>
 
-          <div class="form-group">
-            <label for="password">Contraseña de acceso <span class="required">*</span></label>
-            <input type="password" id="password" name="password" required minlength="8" placeholder="••••••••" aria-describedby="pass-help">
-            <span id="pass-help" class="help-text">Mínimo 8 caracteres (entrada oculta por seguridad).</span>
-          </div>
+    <!-- 3. Sección Artistas Destacados (4 Columnas) -->
+    <section id="artistas">
+      <div class="section-header">
+        <div>
+          <span style="font-size: 0.75rem; color: var(--accent-neon); font-weight: bold; text-transform: uppercase;">Artistas Destacados · 4-Col Grid</span>
+          <h2>Talentos que hacen vibrar a Culiacán</h2>
+        </div>
+        <a href="#" class="link-action">VER TODOS LOS ARTISTAS ➔</a>
+      </div>
 
-          <div class="form-group">
-            <label for="fechaNacimiento">Fecha de nacimiento <span class="required">*</span></label>
-            <input type="date" id="fechaNacimiento" name="fechaNacimiento" required min="1940-01-01" max="2010-12-31" aria-describedby="fecha-help">
-            <span id="fecha-help" class="help-text">Selecciona una fecha válida dentro del rango permitido.</span>
-          </div>
-
-          <div class="form-group">
-            <label for="edad">Edad (Años) <span class="required">*</span></label>
-            <input type="number" id="edad" name="edad" required min="15" max="99" placeholder="Ej. 24" aria-describedby="edad-help">
-            <span id="edad-help" class="help-text">Debes ser mayor de 15 años para registrarte.</span>
-          </div>
-        </fieldset>
-
-        <!-- Ubicación e Identidad -->
-        <fieldset>
-          <legend>Ubicación e Identidad</legend>
-
-          <div class="form-group">
-            <label for="direccion">Dirección o Colonia <span class="required">*</span></label>
-            <input type="text" id="direccion" name="direccion" required maxlength="100" placeholder="Ej. Col. Centro, Av. Álvaro Obregón #123">
-          </div>
-
-          <div class="form-group">
-            <label for="ciudad">Ciudad de residencia <span class="required">*</span></label>
-            <select id="ciudad" name="ciudad" required>
-              <option value="" disabled selected>-- Selecciona tu ciudad --</option>
-              <option value="culiacan">Culiacán</option>
-              <option value="mazatlan">Mazatlán</option>
-              <option value="mochis">Los Mochis</option>
-              <option value="guasave">Guasave</option>
-              <option value="otra">Otra localidad</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Identidad de género <span class="required">*</span></label>
-            <div class="radio-group">
-              <div class="radio-option">
-                <input type="radio" id="femenino" name="genero" value="femenino" required>
-                <label for="femenino">Femenino</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="masculino" name="genero" value="masculino">
-                <label for="masculino">Masculino</label>
-              </div>
-              <div class="radio-option">
-                <input type="radio" id="nobinario" name="genero" value="nobinario">
-                <label for="nobinario">No binario / Otro</label>
-              </div>
+      <div class="grid-4">
+        <!-- Artista 1 -->
+        <article class="artist-card">
+          <div class="artist-avatar">KM</div>
+          <div>
+            <span class="artist-meta">Música · Trova</span>
+            <h4>Karla Mendoza</h4>
+            <div class="tags-container">
+              <span class="tag">Guitarra</span>
+              <span class="tag">Voz</span>
+              <span class="tag">Compositor</span>
             </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">📍 Centro Histórico</p>
           </div>
-        </fieldset>
+          <a href="#contacto" class="btn-card-profile">Ver Perfil +</a>
+        </article>
 
-        <!-- Propuesta y Privacidad -->
-        <fieldset>
-          <legend>Propuesta Artística y Privacidad</legend>
-
-          <div class="form-group">
-            <label for="mensaje">Breve descripción o biografía</label>
-            <textarea id="mensaje" name="mensaje" rows="4" maxlength="300" placeholder="Escribe un resumen de tu trayectoria o proyectos independientes..." aria-describedby="bio-help"></textarea>
-            <span id="bio-help" class="help-text">Máximo 300 caracteres.</span>
+        <!-- Artista 2 -->
+        <article class="artist-card">
+          <div class="artist-avatar">LF</div>
+          <div>
+            <span class="artist-meta">Danza · Folclórica</span>
+            <h4>Luis Félix Rojo</h4>
+            <div class="tags-container">
+              <span class="tag">Ballet</span>
+              <span class="tag">Coreografía</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">📍 Chapultepec</p>
           </div>
+          <a href="#contacto" class="btn-card-profile">Ver Perfil +</a>
+        </article>
 
-          <div class="checkbox-option">
-            <input type="checkbox" id="terminos" name="terminos" required>
-            <label for="terminos">
-              Acepto los términos de la convocatoria y la <a href="#privacidad" style="color: #2563eb;">política de privacidad</a> bajo protocolo HTTPS <span class="required">*</span>
-            </label>
+        <!-- Artista 3 -->
+        <article class="artist-card">
+          <div class="artist-avatar">AS</div>
+          <div>
+            <span class="artist-meta">Artes Visuales</span>
+            <h4>Ana Sofía Palma</h4>
+            <div class="tags-container">
+              <span class="tag">Pintura</span>
+              <span class="tag">Muralismo</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">📍 Las Quintas</p>
           </div>
-        </fieldset>
+          <a href="#contacto" class="btn-card-profile">Ver Perfil +</a>
+        </article>
 
-        <!-- Botón de Envío -->
-        <button type="submit">Enviar Registro</button>
-      </form>
+        <!-- Artista 4 -->
+        <article class="artist-card">
+          <div class="artist-avatar">ML</div>
+          <div>
+            <span class="artist-meta">Teatro · Experimental</span>
+            <h4>Marco A. Leyva</h4>
+            <div class="tags-container">
+              <span class="tag">Actuación</span>
+              <span class="tag">Dirección</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">📍 Tierra Blanca</p>
+          </div>
+          <a href="#contacto" class="btn-card-profile">Ver Perfil +</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. Banner CTA Inferior -->
+    <section id="contacto" class="cta-banner">
+      <div class="cta-banner-text">
+        <span style="font-size: 0.75rem; color: var(--accent-neon); font-weight: bold; text-transform: uppercase;">CTA Banner · Full Width · Dark</span>
+        <h2>¿Eres artista o creador en Culiacán?</h2>
+        <p>Registra tu perfil en el mapa cultural y conecta con tu comunidad. Tu arte merece ser visto — gratis, sin comisiones, sin burocracia.</p>
+      </div>
+      <a href="#" class="btn-primary" style="white-space: nowrap;">Registrar mi perfil ahora ➔</a>
     </section>
   </main>
 
   <!-- Pie de página -->
   <footer>
     <p>&copy; 2026 Talento Cultural Culiacán. Todos los derechos reservados.</p>
-    <p>Contacto: <a href="mailto:contacto@talentoculiacan.org" style="color: #475569;">contacto@talentoculiacan.org</a></p>
+    <p style="margin-top: 0.5rem;">
+      <a href="#">Política de Privacidad</a> | 
+      <a href="#">Términos y Condiciones</a> | 
+      <a href="mailto:contacto@talentoculiacan.org">¿Tienes dudas? Contáctanos</a>
+    </p>
   </footer>
 
-  <!-- Script para la animación interactiva del Canvas -->
-  <script>
-    const canvas = document.getElementById('miCanvas');
-    const ctx = canvas.getContext('2d');
-
-    let x = 30;
-    let dx = 3;
-    const radius = 20;
-
-    function animarCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#0f172a";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.beginPath();
-      ctx.arc(x, canvas.height / 2, radius, 0, Math.PI * 2);
-      ctx.fillStyle = "#38bdf8";
-      ctx.fill();
-      ctx.closePath();
-
-      if (x + dx > canvas.width - radius || x + dx < radius) {
-        dx = -dx;
-      }
-      x += dx;
-
-      requestAnimationFrame(animarCanvas);
-    }
-
-    animarCanvas();
-  </script>
 </body>
 </html>
