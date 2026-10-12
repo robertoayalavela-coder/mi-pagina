@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talento Cultural Culiacán</title>
+  <style>
+    /* Estilos responsivos básicos */
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #1a1a1a; background-color: #f9f9f9; }
+    header, nav, main, footer, section { padding: 1.5rem; max-width: 1000px; margin: 0 auto; }
+    header { background: #0f172a; color: white; border-bottom: 4px solid #38bdf8; text-align: center; }
+    nav a { color: #38bdf8; margin-right: 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .card { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    form { display: grid; gap: 1rem; max-width: 600px; }
+    label { font-weight: 600; }
+    input[type="text"], input[type="email"], input[type="tel"], textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+    .radio-group, .checkbox-group { display: flex; gap: 10px; align-items: center; }
+    button[type="submit"] { background: #2563eb; color: white; padding: 0.75rem; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+    button[type="submit"]:hover { background: #1d4ed8; }
+    
+    /* Contenedores responsivos para multimedia y canvas */
+    video, audio, svg { width: 100%; max-width: 100%; height: auto; }
+    .canvas-container { width: 100%; max-width: 500px; margin: auto; }
+    canvas { width: 100%; height: auto; border: 1px solid #cbd5e1; border-radius: 4px; background: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Encabezado -->
+  <header>
+    <h1>Talento Cultural Culiacán</h1>
+    <p>Plataforma de mapeo y promoción artística local</p>
+    <!-- Navegación con enlaces internos -->
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#multimedia">Muestra Cultural</a>
+      <a href="#graficos">Interactivos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Contenido Principal -->
+    <section id="inicio" class="card">
+      <h2>Mapa de Talento Local</h2>
+      <p>Bienvenido al portal del proyecto. Esta plataforma busca visibilizar a los creadores de Culiacán, conectando a músicos, ilustradores, artistas visuales y colectivos culturales independientes con la comunidad y espacios locales.</p>
+    </section>
+
+    <!-- 2. Integración de Multimedia -->
+    <section id="multimedia" class="card">
+      <h2>Muestra Multimedia</h2>
+      
+      <!-- Video con múltiples fuentes y fallback -->
+      <h3>Muestra Audiovisual</h3>
+      <video controls loop poster="https://via.placeholder.com/800x450?text=Vista+Previa+Video">
+        <source src="video67.mp4" type="video/mp4">
+        <p>Tu navegador no admite la etiqueta de video. Puedes <a href="video67.mp4">descargar el video aquí</a>.</p>
+      </video>
+
+      <!-- Audio con múltiples fuentes y fallback -->
+      <h3>Audio / Entrevista a Artista</h3>
+      <audio controls loop preload="metadata">
+        <source src="audio-muestra.mp3" type="audio/mpeg">
+        <source src="audio-muestra.ogg" type="audio/ogg">
+        <p>Tu navegador no soporta el elemento de audio. <a href="audio-muestra.mp3">Descarga el archivo de audio aquí</a>.</p>
+      </audio>
+    </section>
+
+    <!-- 3. Gráficos y Animaciones con SVG y Canvas -->
+    <section id="graficos" class="card">
+      <h2>Gráficos Interactivos</h2>
+      
+      <!-- SVG Escalable con animación CSS integrada -->
+      <h3>Insignia Cultural (SVG Vectorial)</h3>
+      <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .pulse { animation: opacityPulse 2s infinite ease-in-out; }
+          @keyframes opacityPulse { 0%, 100% { fill: #38bdf8; } 50% { fill: #f43f5e; } }
+        </style>
+        <rect width="100%" height="100%" rx="10" fill="#1e293b"/>
+        <circle cx="50" cy="50" r="25" class="pulse" />
+        <text x="90" y="55" fill="#ffffff" font-size="18" font-family="sans-serif" font-weight="bold">Culiacán Arte</text>
+      </svg>
+
+      <!-- Canvas responsivo con animación en JavaScript -->
+      <h3>Animación con Canvas HTML5</h3>
+      <div class="canvas-container">
+        <canvas id="miCanvas" width="500" height="200"></canvas>
+      </div>
+    </section>
+
+    <!-- 4. Formulario de Entrada con Validaciones -->
+    <section id="contacto" class="card">
+      <h2>Registro de Artista / Contacto</h2>
+      <form action="#" method="POST">
+        
+        <!-- Nombre -->
+        <div>
+          <label for="nombre">Nombre completo:</label>
+          <input type="text" id="nombre" name="nombre" required maxlength="60" placeholder="Ej. Roberto Gastélum">
+        </div>
+
+        <!-- Correo Electrónico con validación por patrón -->
+        <div>
+          <label for="email">Correo electrónico:</label>
+          <input type="email" id="email" name="email" required placeholder="usuario@dominio.com">
+        </div>
+
+        <!-- Teléfono con validación de formato (10 dígitos) -->
+        <div>
+          <label for="telefono">Número de teléfono (10 dígitos):</label>
+          <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10}" maxlength="10" placeholder="6671234567">
+        </div>
+
+        <!-- Radio Buttons -->
+        <div>
+          <label>Disciplina artística principal:</label>
+          <div class="radio-group">
+            <input type="radio" id="musica" name="disciplina" value="musica" required>
+            <label for="musica">Música</label>
+            
+            <input type="radio" id="diseno" name="disciplina" value="diseno">
+            <label for="diseno">Diseño / Ilustración</label>
+            
+            <input type="radio" id="teatro" name="disciplina" value="teatro">
+            <label for="teatro">Artes Escénicas</label>
+          </div>
+        </div>
+
+        <!-- Campo de texto (Mensaje) -->
+        <div>
+          <label for="mensaje">Propuesta o biografía corta:</label>
+          <textarea id="mensaje" name="mensaje" rows="4" required maxlength="300" placeholder="Escribe tu mensaje aquí (máx. 300 caracteres)..."></textarea>
+        </div>
+
+        <!-- Checkbox de Términos y Condiciones -->
+        <div class="checkbox-group">
+          <input type="checkbox" id="terminos" name="terminos" required>
+          <label for="terminos">Acepto los términos de la convocatoria y la política de privacidad.</label>
+        </div>
+
+        <!-- Botón de Envío -->
+        <button type="submit">Enviar Registro</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>&copy; 2026 Talento Cultural Culiacán. Todos los derechos reservados.</p>
+    <p>Contacto: <a href="mailto:contacto@talentoculiacan.org" style="color: #cbd5e1;">contacto@talentoculiacan.org</a></p>
+  </footer>
+
+  <!-- Script para la animación interactiva del Canvas -->
+  <script>
+    const canvas = document.getElementById('miCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let x = 30;
+    let dx = 3;
+    const radius = 20;
+
+    function animarCanvas() {
+      // Limpiar lienzo
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Dibujar fondo de referencia
+      ctx.fillStyle = "#0f172a";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Dibujar elemento en movimiento
+      ctx.beginPath();
+      ctx.arc(x, canvas.height / 2, radius, 0, Math.PI * 2);
+      ctx.fillStyle = "#38bdf8";
+      ctx.fill();
+      ctx.closePath();
+
+      // Rebote de bordes
+      if (x + dx > canvas.width - radius || x + dx < radius) {
+        dx = -dx;
+      }
+      x += dx;
+
+      requestAnimationFrame(animarCanvas);
+    }
+
+    // Iniciar animación
+    animarCanvas();
+  </script>
+</body>
+</html>
